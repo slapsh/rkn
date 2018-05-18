@@ -1,8 +1,9 @@
 #!/bin/bash
 
-RKN=dump.csv
+URL='https://sourceforge.net/p/z-i/code-0/HEAD/tree/dump.csv?format=raw'
+RKN='dump.csv'
 
-curl --connect-timeout 10 -L -o ${RKN} https://github.com/zapret-info/z-i/raw/master/dump.csv || exit 1
+curl --connect-timeout 10 -L -o ${RKN} ${URL} || exit 1
 ./net.sh ${RKN} > net.txt
 ./ip.sh ${RKN} > ip.txt
 ./ip24.sh ip.txt > ip24.txt
