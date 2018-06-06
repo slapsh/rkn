@@ -8,7 +8,10 @@ curl --connect-timeout 10 -L -o ${RKN} ${URL} || exit 1
 ./net.sh ${RKN} > net.txt
 ./ip.sh ${RKN} > ip.txt
 ./ip24.sh ip.txt > ip24.txt
-grep -v '^#' net-manual.txt | grep -v '^$' >> net.txt
+if [ -f net-manual.txt ]
+then
+  grep -v '^#' net-manual.txt | grep -v '^$' >> net.txt
+fi
 if [ "${1}" == "diff" ]
 then
   cat net.txt ip.txt ip24.txt | ./supernets.py > routes-new.txt
