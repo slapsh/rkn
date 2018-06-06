@@ -1,6 +1,7 @@
 #!/bin/bash
 
-URL='https://sourceforge.net/p/z-i/code-0/HEAD/tree/dump.csv?format=raw'
+#URL='https://sourceforge.net/p/z-i/code-0/HEAD/tree/dump.csv?format=raw'
+URL='https://github.com/zapret-info/z-i/raw/master/dump.csv'
 RKN='dump.csv'
 
 curl --connect-timeout 10 -L -o ${RKN} ${URL} || exit 1
