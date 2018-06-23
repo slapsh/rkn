@@ -1,0 +1,7 @@
+#!/bin/sh
+
+ls | grep '\.sh' | while read T ; do
+  BLOCKNAME=`echo $T | cut -f1 -d'.'`
+  echo "#${BLOCKNAME}"
+  sh "${T}"
+done
