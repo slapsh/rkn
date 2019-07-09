@@ -14,7 +14,7 @@ then
 fi
 if [ "${1}" == "diff" ]
 then
-  cat net.txt ip.txt ip24.txt | ./supernets.py > routes-new.txt
+  cat net.txt ip.txt ip24.txt | ./supernets.py | ./exclude.py > routes-new.txt
   diff -U 0 routes.txt routes-new.txt | sed '1,2d' | grep '^-' | cut -c2- > routes-del.txt
   diff -U 0 routes.txt routes-new.txt | sed '1,2d' | grep '^+' | cut -c2- > routes-add.txt
   mv routes-new.txt routes.txt
@@ -25,7 +25,7 @@ then
   echo -n '-'
   cat routes-del.txt | wc -l
 else
-  cat net.txt ip.txt ip24.txt | ./supernets.py > routes.txt
+  cat net.txt ip.txt ip24.txt | ./supernets.py | ./exclude.py > routes.txt
   echo "/ip route remove [ find gateway=ovpn-rkn static=yes ]" > vpn-routes-full.rsc
   cat routes.txt | awk '{ print "/ip route add distance=1 dst-address=" $1 " gateway=ovpn-rkn" }' >> vpn-routes-full.rsc
 fi
